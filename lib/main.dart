@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'playlist.dart';
 
 void main() {
   runApp(const MyApp());
@@ -64,6 +65,8 @@ class _MyHomePageState extends State<MyHomePage> {
     },
   ];
 
+  Playlist summerplaylist = Playlist();
+
   var play_pause = true;
   var result;
   void max_song() {
@@ -115,16 +118,18 @@ class _MyHomePageState extends State<MyHomePage> {
             ClipRRect(
               borderRadius: BorderRadius.circular(30),
               child: Image(
-                image: AssetImage(my_playlist[audioNo]['albulm_image']!),
+                image: AssetImage(
+                    summerplaylist.myplaylist[audioNo].albulm_image!),
+                // image: AssetImage(my_playlist[audioNo]['albulm_image']!),
                 width: 200,
                 height: 200,
               ),
             ),
             Text(
-              my_playlist[audioNo]['name']!,
+              summerplaylist.myplaylist[audioNo].name,
               style: const TextStyle(fontSize: 20),
             ),
-            Text(my_playlist[audioNo]['artist']!),
+            Text(summerplaylist.myplaylist[audioNo].artist),
             // Text(my_playlist[audioNo]['name']),
 
             Column(
@@ -157,8 +162,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           setState(() {
                             max_song();
                           });
+                          // result = await audioPlayer
+                          //     .play(my_playlist[audioNo]['url']!);
                           result = await audioPlayer
-                              .play(my_playlist[audioNo]['url']!);
+                              .play(summerplaylist.myplaylist[audioNo].url);
                         },
                         icon: const Icon(Icons.skip_previous)),
                     IconButton(
@@ -186,7 +193,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             max_song();
                           });
                           result = await audioPlayer
-                              .play(my_playlist[audioNo]['url']!);
+                              .play(summerplaylist.myplaylist[audioNo].url);
                         },
                         icon: const Icon(Icons.skip_next))
                   ],
